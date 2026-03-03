@@ -1,0 +1,357 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════
+   CUSTOM PLAYSTATION FONTS
+   Served from /public/fonts/ — accessible at /fonts/...
+   
+   PSBold   → Big cinematic display headlines (game titles, username)
+   PsOld    → Section headers, secondary display text
+   Zrnic    → UI chrome: nav labels, button text, HUD, caps labels
+   Zrnic RG → Lighter UI labels, body-adjacent text
+══════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'PSBold';
+  src: url('/fonts/PsBold-2Oy2w.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PsOld';
+  src: url('/fonts/PsOld-vmPMD.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Zrnic';
+  src: url('/fonts/zrnic___.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ZrnicRG';
+  src: url('/fonts/zrnic rg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PlayStation Theme CSS Variables */
+:root {
+  --ps-black: #0a0e1a;
+  --ps-surface: #141824;
+  --ps-surface2: #1e2433;
+  --ps-border: #1e2d45;
+  --ps-blue: #0070d1;
+  --ps-cyan: #00d4ff;
+  --ps-green: #00e676;
+  --ps-gold: #f5a623;
+  --ps-text-primary: #ffffff;
+  --ps-text-secondary: #8a9bb5;
+
+  /* ── Font families as tokens ── */
+  --font-display: 'PSBold', 'Inter', system-ui, sans-serif;
+  --font-ps-old: 'PsOld', 'Inter', system-ui, sans-serif;
+  --font-ui: 'Zrnic', 'Inter', system-ui, sans-serif;
+  --font-ui-rg: 'ZrnicRG', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Glass morphism tokens */
+  --glass-bg: rgba(14, 18, 32, 0.65);
+  --glass-bg-light: rgba(20, 26, 48, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(0, 112, 209, 0.4);
+  --glass-blur: blur(16px);
+  --glass-blur-heavy: blur(24px);
+}
+
+
+/* ── Global Reset & Body ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--ps-black);
+  color: var(--ps-text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Global Film Grain Texture ──
+   The single biggest differentiator between "AI-template" look and
+   a professionally designed dark UI. Subtle noise breaks the sterile
+   perfection of digital gradients, adding organic tactility.
+*/
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  pointer-events: none;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  cursor: none !important;
+  /* Shorter, snappier transitions — "tight" feel vs sluggish AI-generated 0.3s everything */
+  transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, border-color 0.18s ease, color 0.15s ease;
+}
+
+
+/* ── Font Utility Classes ──
+   Apply custom PS fonts anywhere via class or var()
+   Example: className="font-display"  or  fontFamily: 'var(--font-ui)'
+*/
+.font-display {
+  font-family: var(--font-display) !important;
+}
+
+.font-ps-old {
+  font-family: var(--font-ps-old) !important;
+}
+
+.font-ui {
+  font-family: var(--font-ui) !important;
+}
+
+.font-ui-rg {
+  font-family: var(--font-ui-rg) !important;
+}
+
+/* ── Global PS Font Application — covers ALL pages automatically ──
+   PSBold on all headings, Zrnic on all buttons and nav links.
+   inline-style fontFamily overrides still take precedence where set.
+*/
+html {
+  font-size: 17px;
+  height: 100%;
+  /* bump from browser default 16px — makes every rem-relative size 6% larger */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+}
+
+button {
+  font-family: var(--font-ui);
+  letter-spacing: 0.4px;
+}
+
+/* Inputs keep Inter for legibility */
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+}
+
+/* ── Select/sort dropdowns get Zrnic too ── */
+select {
+  font-family: var(--font-ui);
+}
+
+/* ── Glassmorphism Utility Classes ── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-heavy {
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--glass-border);
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 112, 209, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0070d1;
+}
+
+/* ── Animations ── */
+@keyframes psPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+@keyframes psSlideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes psFadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes progressDraw {
+  from {
+    stroke-dashoffset: 220;
+  }
+}
+
+/* ── Focus remove outline ── */
+button:focus {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* allow visible focus outline when navigating via controller/keyboard */
+nav a:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/*
+  Logo background removal.
+  COD and Kena logos have pure-black backgrounds.
+  mix-blend-mode:screen on a black-bg wrapper makes the black
+  pixels mathematically disappear (screen: result = 1-(1-a)(1-b), so black=0 → result=underlying).
+  The wrapper itself must NOT be inside an isolated stacking context
+  (transforms, filters, overflow:hidden on ancestors break it).
+  We handle this by placing the blend wrapper as a direct child of the
+  positioned overlay div instead of inside filtered containers.
+*/
+.logo-blend-wrapper {
+  display: inline-flex;
+  background: #000000;
+  mix-blend-mode: screen;
+  border-radius: 4px;
+  /* Do NOT add filter, transform, or overflow here — it breaks blending */
+}
+
+/* Moving Out logo is already transparent — just show it normally */
+.logo-transparent {
+  display: inline-flex;
+  background: transparent;
+}
+
+/* ══════════════════════════════════════════════════════
+   CONTROLLER FOCUS NAVIGATION
+   PS5-style focus ring for D-pad / keyboard navigation
+══════════════════════════════════════════════════════ */
+
+[data-focusable] {
+  transition: outline 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+}
+
+.ps-focused {
+  outline: 2.5px solid rgba(255, 255, 255, 0.92) !important;
+  outline-offset: 5px !important;
+  box-shadow:
+    0 0 0 7px rgba(0, 112, 209, 0.28),
+    0 0 32px rgba(0, 112, 209, 0.18) !important;
+  z-index: 50 !important;
+  position: relative;
+  animation: psFocusGlow 2s ease-in-out infinite !important;
+}
+
+@keyframes psFocusGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 7px rgba(0, 112, 209, 0.28),
+      0 0 32px rgba(0, 112, 209, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 9px rgba(0, 112, 209, 0.42),
+      0 0 44px rgba(0, 112, 209, 0.28);
+  }
+}
