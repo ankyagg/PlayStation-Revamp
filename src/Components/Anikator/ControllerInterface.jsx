@@ -10,6 +10,7 @@ export default function ControllerInterface() {
     const [pressed, setPressed] = useState(null); // track which button is pressed for glow
 
     useEffect(() => {
+        g
         const checkOrientation = () => {
             setIsPortrait(window.innerHeight > window.innerWidth);
         };
