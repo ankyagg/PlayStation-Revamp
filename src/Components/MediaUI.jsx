@@ -667,21 +667,21 @@ const PSMediaUI = () => {
                 {activeSection === "Music" && (
                     <div style={{ padding: "24px 48px 40px", height: "calc(100vh - 200px)" }}>
                         <div style={{ marginBottom: "16px" }}>
-                            <h2 style={{ fontSize: "28px", fontWeight: 900, marginBottom: "8px", fontFamily: "var(--font-display)" }}>Vibify</h2>
-                        
+                            <h2 style={{ fontSize: "28px", fontWeight: 900, marginBottom: "8px", fontFamily: "var(--font-display)" }}>MusicHub</h2>
                         </div>
                         <iframe
-                            src="https://vibeify-obql.onrender.com/"
+                            src="https://musichubs.vercel.app/?theme=dark"
+                            title="MusicHubs Music Player"
+                            allowTransparency="true"
                             style={{
                                 width: "100%",
-                                height: "75vh",
-                                border: "1px solid rgba(255,255,255,0.1)",
+                                height: "calc(100%)",
+                                border: "1px solid rgba(255,255,255,0.08)",
                                 borderRadius: "16px",
-                                background: "#0a0e1a",
+                                background: "transparent",
+                                colorScheme: "dark",
                             }}
-                            title="Vibify Music Visualizer"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; microphone"
-                            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation"
+                            allow="autoplay; encrypted-media; fullscreen"
                         />
                     </div>
                 )}
