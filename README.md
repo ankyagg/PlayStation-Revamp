@@ -23,7 +23,7 @@ Experience the PlayStation 5 interface like never before — fully recreated in 
 
 ### 🎯 Live Demo
 
-**🌐 [https://playstation-revamp.vercel.app/](https://playstation-revamp.vercel.app/)**
+**🌐 [https://playstation-revamp.onrender.com/](https://playstation-revamp.onrender.com/)**
 
 > **Tip:** For the best experience, open the demo on a desktop browser and scan the QR code with your mobile device to use it as a controller!
 
