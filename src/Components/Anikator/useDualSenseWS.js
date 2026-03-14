@@ -25,6 +25,7 @@ export function useDualSenseWS(customSession) {
     useEffect(() => {
         // Determine the WS URL (using the same host/port, but wss/ws protocol)
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+
         // Add session to the ws URL
         const wsUrl = `${protocol}//${window.location.host}/playstation-ws?session=${session}`;
 
